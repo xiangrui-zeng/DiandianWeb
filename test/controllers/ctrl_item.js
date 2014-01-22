@@ -62,8 +62,6 @@ describe("../../controllers/ctrl_item.js", function () {
     Item.add(handler, function (err, itemDocs) {
         should.not.exist(err);
 
-//        should.not.exist(itemDocs);
-
         itemDocs.should.have.property('itemName', 'test');
       done();
     });
@@ -84,35 +82,35 @@ describe("../../controllers/ctrl_item.js", function () {
 
   });
 
-//
-//  it('should update ok', function (done) {
-//    Item.update(handler, function (err, Item) {
-//      should.not.exist(err);
-//      Item.should.have.property('itemName', 'test');
-//      done();
-//    });
-//
-//  });
-//
-//  it('should remove ok', function (done) {
-//
-//    Item.remove(handler, function (err, Item) {
-//      should.not.exist(err);
-//
-//      done();
-//    });
-//
-//  });
-//
-//  it('should get ok', function (done) {
-//
-//    Item.get(handler, function (err, Item) {
-//      should.not.exist(err);
-//
-//      done();
-//    });
-//
-//  });
+
+  it('should update ok', function (done) {
+    Item.update(handler, function (err, Item) {
+      should.not.exist(err);
+      Item.should.have.property('itemName', 'test');
+      done();
+    });
+
+  });
+
+  it('should remove ok', function (done) {
+
+    Item.remove(handler, function (err, Item) {
+      should.not.exist(err);
+
+      done();
+    });
+
+  });
+
+  it('should get ok', function (done) {
+
+    Item.get(handler, function (err, Item) {
+      should.not.exist(err);
+
+      done();
+    });
+
+  });
 
 
 });

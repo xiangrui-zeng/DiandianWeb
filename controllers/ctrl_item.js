@@ -236,7 +236,6 @@ exports.add = function(handler, callback){
     });
   });
 
-
   // 新增的tag，添加到tag表
   tasks.push(function(result, cb) {
     var add = _.difference(tags, result);
