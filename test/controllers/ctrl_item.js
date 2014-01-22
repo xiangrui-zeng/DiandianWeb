@@ -93,7 +93,6 @@ describe("../../controllers/ctrl_item.js", function () {
 
   });
 
-
   it('should update ok', function (done) {
     handler.addParams("id",newItemId);
 
