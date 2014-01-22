@@ -296,16 +296,20 @@ exports.update = function(handler, callback) {
     , editby: handler.uid
   };
   var tasks = [];
+  var tmpResult;
   newItem.createat = now;
   newItem.createby = handler.uid;
 
   tasks.push(function(cb){
 
     item.update(code, handler.params.id, newItem, function(err, result){
+
       if (err) {
         return cb(new error.InternalServer(err));
       }
 
+
+      tmpResult = result;
       cb(err, result);
     });
   });
@@ -329,7 +333,7 @@ exports.update = function(handler, callback) {
   });
 
   async.waterfall(tasks, function(err, result){
-    return callback(err, result);
+    return callback(err, tmpResult);
   });
 };
 

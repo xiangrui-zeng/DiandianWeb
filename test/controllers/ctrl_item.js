@@ -8,7 +8,16 @@ var context = smart.framework.context
 var Item = require("../../controllers/ctrl_item.js");
 
 describe("../../controllers/ctrl_item.js", function () {
-  var handler = new context().bind({uid: "52946dc7dc0ac8bb12000001" , lang: "ja"}, {});
+  var handler = new context().bind({
+    session: {
+      user: {
+        _id: "52946dc7dc0ac8bb12000001"
+        , companycode: ""
+        , lang: "ja"
+      }
+    }
+  });
+
   handler.addParams("start", 0);
   handler.addParams("limit", 20);
   handler.addParams("keyword", "");
@@ -20,6 +29,7 @@ describe("../../controllers/ctrl_item.js", function () {
   handler.addParams("itemPriceHalf", "50");
   handler.addParams("itemPriceDiscount", "30");
   handler.addParams("itemType", "");
+  handler.addParams("discount", "10");
   handler.addParams("itemComment", "test");
   handler.addParams("itemMaterial", "test");
   handler.addParams("itemMethod", "test");
@@ -46,10 +56,11 @@ describe("../../controllers/ctrl_item.js", function () {
     , printerId         : "1"
   };
   var itemlist = {}
+  var newItemId = "";
   it('should applist ok', function (done) {
 
     Item.appList(handler, function (err, item) {
-
+      console.log(handler.uid);
       should.not.exist(err);
       itemlist = item;
       done();
@@ -61,7 +72,7 @@ describe("../../controllers/ctrl_item.js", function () {
 
     Item.add(handler, function (err, itemDocs) {
         should.not.exist(err);
-
+      newItemId = itemDocs._id;
         itemDocs.should.have.property('itemName', 'test');
       done();
     });
@@ -84,9 +95,11 @@ describe("../../controllers/ctrl_item.js", function () {
 
 
   it('should update ok', function (done) {
-    Item.update(handler, function (err, Item) {
+    handler.addParams("id",newItemId);
+
+    Item.update(handler, function (err, itemDocs) {
       should.not.exist(err);
-      Item.should.have.property('itemName', 'test');
+      itemDocs.should.have.property('itemName', 'test');
       done();
     });
 

@@ -53,7 +53,7 @@ function model(dbname) {
  */
 exports.add = function(code, newItem, callback) {
 
-  console.log(newItem);
+
   var item = model(code);
 
   new item(newItem).save(function(err, result) {
@@ -71,7 +71,6 @@ exports.add = function(code, newItem, callback) {
 exports.update = function(code, itemId, newItem, callback) {
 
   var item = model(code);
-  console.log(itemId)
 
   item.findByIdAndUpdate(itemId, newItem, function(err, result) {
     callback(err, result);
@@ -86,7 +85,6 @@ exports.update = function(code, itemId, newItem, callback) {
  */
 exports.get = function(code, itemId, callback) {
   var item = model(code);
-  console.log(itemId)
 
   item.findOne({_id: itemId}, function(err, result) {
     callback(err, result);
